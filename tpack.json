@@ -1,0 +1,18 @@
+{
+    "output": "dist/Trilium-SingleFile.zip",
+    "notes": {
+        "title": "SingleFile Settings",
+        "type": "render",
+        "attributes": {
+            "~renderNote": "static/index.html"
+        },
+        "children": [
+            {
+                "file": "static/index.html",
+                "children": [
+                    {"file": "dist/bundle.js"}
+                ]
+            }
+        ]
+    }
+}

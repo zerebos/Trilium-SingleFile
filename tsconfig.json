@@ -1,0 +1,34 @@
+{
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "resolveJsonModule": true,
+        "declaration": true,
+        "strictNullChecks": true,
+        "moduleResolution": "Node16",
+        "target": "ES2020",
+        "rootDir": "src",
+        "outDir": "lib/cjs",
+        "module": "Node16",
+        "jsx": "preserve",
+        "jsxImportSource": "solid-js",
+    },
+    "include": ["src/*"],
+    "typedocOptions": {
+        "name": "TriliumETAPI",
+        "entryPoints": ["src/index.ts"],
+        "out": "docs",
+        "includeVersion": true,
+        "navigationLinks": {
+            "Trilium": "https://github.com/zadam/trilium"
+        },
+        "sidebarLinks": {},
+        "navigation": {
+            "fullTree": true,
+            "includeCategories": true,
+            "includeGroups": false
+        }
+    }
+}
