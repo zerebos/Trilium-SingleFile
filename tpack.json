@@ -1,17 +1,29 @@
 {
     "output": "dist/Trilium-SingleFile.zip",
     "notes": {
-        "title": "SingleFile Settings",
+        "title": "Trilium SingleFile",
         "type": "render",
         "attributes": {
             "~renderNote": "static/index.html"
         },
         "children": [
             {
+                "title": "",
                 "file": "static/index.html",
                 "children": [
-                    {"file": "dist/bundle.js"}
+                    {"title": "UI", "file": "dist/ui.js"}
                 ]
+            },
+            {
+                "title": "Main",
+                "file": "dist/main.js",
+                "attributes": {
+                    "#run": "frontendStartup"
+                }
+            },
+            {
+                "title": "Settings",
+                "file": "static/settings.json"
             }
         ]
     }

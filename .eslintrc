@@ -94,6 +94,7 @@
         "yoda": "error"
     },
     "globals": {
-        "api": "readonly"
+        "api": "readonly",
+        "NodeJS": "readonly"
     }
 }

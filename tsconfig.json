@@ -15,7 +15,7 @@
         "jsx": "preserve",
         "jsxImportSource": "solid-js",
     },
-    "include": ["src/*"],
+    "include": ["src/**/*"],
     "typedocOptions": {
         "name": "TriliumETAPI",
         "entryPoints": ["src/index.ts"],

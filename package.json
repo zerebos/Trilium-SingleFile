@@ -5,27 +5,32 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build": "ts-node-esm scripts/build.ts",
+    "build": "esrun scripts/build.ts",
+    "build-main": "esrun scripts/build.ts -- --module=main",
+    "build-ui": "esrun scripts/build.ts -- --module=ui",
+    "build-dist": "esrun scripts/build.ts -- --minify",
     "pack": "tpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/trilium": "npm:trilium-types@^0.1.0",
+    "@digitak/esrun": "^3.2.24",
+    "@electron/remote": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^6.7.0",
     "@typescript-eslint/parser": "^6.7.0",
     "dotenv": "^16.3.1",
+    "electron": "^26.2.1",
     "esbuild": "^0.19.3",
     "esbuild-plugin-solid": "^0.5.0",
     "eslint": "^8.49.0",
     "eslint-plugin-solid": "^0.13.0",
     "trilium-etapi": "^0.1.1",
     "trilium-pack": "^0.1.0",
-    "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
   },
   "dependencies": {
+    "@types/trilium": "file:../trilium-types",
     "solid-js": "^1.7.11"
   }
 }
