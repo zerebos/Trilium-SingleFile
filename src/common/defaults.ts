@@ -1,6 +1,30 @@
 import {app} from "@electron/remote";
 
-export default {
+
+export interface SettingsType {
+    // Watcher Settings
+    shouldWatch: boolean;
+    watchFolder: string;
+
+    // Customization
+    titleTemplate: string;
+    addressTemplate: string;
+
+    // Import Settings
+    deleteAfterImport: boolean;
+}
+
+const defaultSettings: SettingsType = {
+    // Watcher Settings
+    shouldWatch: true,
+    watchFolder: app.getPath("downloads"),
+
+    // Customization
     titleTemplate: "{pageTitle}",
-    watchFolder: app.getPath("downloads")
+    addressTemplate: "{pageUrl}",
+
+    // Import Settings
+    deleteAfterImport: false
 };
+
+export default defaultSettings;

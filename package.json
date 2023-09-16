@@ -17,6 +17,7 @@
   "devDependencies": {
     "@digitak/esrun": "^3.2.24",
     "@electron/remote": "^2.0.11",
+    "@types/trilium": "file:../trilium-types",
     "@typescript-eslint/eslint-plugin": "^6.7.0",
     "@typescript-eslint/parser": "^6.7.0",
     "dotenv": "^16.3.1",
@@ -30,7 +31,6 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
-    "@types/trilium": "file:../trilium-types",
     "solid-js": "^1.7.11"
   }
 }

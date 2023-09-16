@@ -48,4 +48,6 @@ export default function startWatcher<T extends (f: string) => Promise<void>>(dir
     });
 
     window.singleFileWatcher = watcher;
+
+    return watcher;
 }

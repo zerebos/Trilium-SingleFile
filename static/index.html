@@ -1,1 +1,87 @@
-<div id="render-note-root"></div>
+<div id="browser-window">
+    <div class="browser-header">
+        <div class="window-actions">
+            <span class="window-dot" style="background: rgb(242, 95, 88);"></span>
+            <span class="window-dot" style="background: rgb(251, 190, 60);"></span>
+            <span class="window-dot" style="background: rgb(88, 203, 66);"></span>
+        </div>
+        <div class="address-bar">
+            {url}
+        </div>
+        <div class="hamburger">
+            <span class="burger-bar"></span>
+            <span class="burger-bar"></span>
+            <span class="burger-bar"></span>
+        </div>
+    </div>
+    <div class="browser-body">
+        <div id="render-note-root"></div>
+    </div>
+</div>
+<style>
+    #browser-window {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        margin: 20px auto;
+        width: 90%;
+    }
+
+    #browser-window .browser-body {
+        flex: 1;
+    }
+
+    #browser-window .browser-header {
+        display: flex;
+        align-items: center;
+        background: #444950;
+        border-radius: 12px 12px 0 0;
+        overflow: hidden;
+        padding: 10px 16px;
+        min-height: 49px;
+    }
+
+    #browser-window .window-dot {
+        border-radius: 50%;
+        display: inline-block;
+        height: 12px;
+        margin-right: 6px;
+        margin-top: 4px;
+        width: 12px;
+    }
+
+    #browser-window .address-bar {
+        display: flex;
+        align-items: center;
+        background-color: #1B1B1D;
+        border-radius: 12.5px;
+        color: #DADDE1;
+        flex: 1 0;
+        font: 400 13px Arial, sans-serif;
+        margin: 0 1rem 0 .5rem;
+        padding: 5px 15px;
+    }
+
+    #browser-window .burger-bar {
+        background-color: #aaa;
+        display: block;
+        height: 3px;
+        margin: 3px 0;
+        width: 17px;
+    }
+    
+    #browser-window .browser-body {
+        display: flex;
+        border: 3px solid #444950;
+        border-radius: 0 0 12px 12px;
+    }
+    
+    #browser-window .browser-body iframe {
+        flex: 1;
+        border: 0;
+        outline: 0;
+        border-radius: 0 0 12px 12px;
+        height: 100vh;
+        overflow: hidden;
+    }
+</style>

@@ -1,35 +1,54 @@
-let settingsNote = await getSettingsNote();
+import {Note} from "trilium/frontend";
+import {BackendAPI} from "trilium/backend";
+import {ipcRenderer} from "electron";
+
+import ipc from "./ipc.js";
+import defaultSettings, {SettingsType} from "./defaults.js";
+
+
+let settingsNote: Note | void;
 
 async function getSettingsNote() {
-    const parentIds = api.currentNote.getParentNoteIds();
-    if (parentIds.length > 1) {
-        return api.showMessage("Trilium SingleFile has multiple parents, note that this is currently unsupported.");
-    }
-
-    const parent = await api.getNote(parentIds[0]);
-    const siblings = await parent.getChildNotes();
-    const settings = siblings.find(n => n.type === "code" && n.mime === "application/json");
-    if (!settings) {
-        return api.showError("Trilium SingleFile could not find settings note, you may need to reinstall this addon.");
-    }
-
+    const settings = await api.searchForNote("#singleFileSettings");
+    if (!settings) return api.showError("Trilium SingleFile could not find settings note, you may need to reinstall this addon.");
     return settings;
 }
 
 
-async function getSettings(): Promise<Record<string, string>> {
+async function getSettings(): Promise<SettingsType> {
     if (!settingsNote) settingsNote = await getSettingsNote();
-    if (!settingsNote) return {};
+    if (!settingsNote) return Object.assign({}, defaultSettings);
 
     const content = await settingsNote.getContent();
     try {
-        return JSON.parse(content) as Record<string, string>;
+        const saved = JSON.parse(content) as Partial<SettingsType>;
+        return Object.assign({}, defaultSettings, saved);
     }
     catch {
         api.showError("Trilium SingleFile settings note seems to be corrupt.");
-        return {};
+        return Object.assign({}, defaultSettings);
     }
 }
 
 
-export {getSettingsNote, getSettings};
+async function updateSettings(newSettings: Partial<SettingsType>): Promise<void> {
+    const current = await getSettings();
+    Object.assign(current, newSettings);
+
+    if (!settingsNote) settingsNote = await getSettingsNote();
+    if (!settingsNote) return;
+
+    await api.runOnBackend((id: string, content: string) => {
+        (api as unknown as BackendAPI).getNote(id)?.setContent(content);
+    }, [settingsNote.noteId, JSON.stringify(current, null, 4)]);
+
+    await ipcRenderer.invoke(ipc.SETTINGS_UPDATE);
+}
+
+
+function getDefaults() {
+    return Object.assign({}, defaultSettings);
+}
+
+
+export {getSettingsNote, getSettings, updateSettings, getDefaults, SettingsType};

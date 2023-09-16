@@ -3,6 +3,9 @@
 import template from "../../static/template.html";
 import fs from "fs";
 import path from "path";
+
+import {getSettings} from "../common/settings.js";
+
 import setupNotes from "./backend.js";
 
 
@@ -37,5 +40,8 @@ export default async function checkAndImport(file: string) {
         if (fileMatch && fileMatch.length === 2) title = fileMatch[1];
     }
 
-    await api.runOnBackend(setupNotes, [title, url, date, content, (template as string).replace("{url}", url)]);
+    const settings = await getSettings();
+    const finalTitle = settings.titleTemplate.replace("{pageTitle}", title).replace("{pageUrl}", url).replace("{saveDate}", date);
+
+    await api.runOnBackend(setupNotes, [finalTitle, url, date, content, (template as string).replace("{url}", url)]);
 }

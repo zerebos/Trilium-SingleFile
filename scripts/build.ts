@@ -91,8 +91,7 @@ async function runBuild() {
         plugins: plugins,
         logLevel: "info",
         metafile: true,
-        minify: process.argv.includes("--minify"),
-        platform: "node"
+        minify: process.argv.includes("--minify")
     });
     const after = performance.now();
     console.log(`Build actually took ${(after - before).toFixed(2)}ms`);
