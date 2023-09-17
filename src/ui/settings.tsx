@@ -1,7 +1,7 @@
 import {createSignal, onMount, For} from "solid-js";
 import {getDefaults, getSettings} from "../common/settings.js";
 
-import config from "../common/config.js";
+import config, {FileSetting, SwitchSetting, TextSetting} from "../common/config.js";
 
 import Switch from "./settings/switch.jsx";
 import Text from "./settings/text.jsx";
@@ -23,8 +23,9 @@ export default function Settings() {
                 <For each={config}>
                 {(category) => {
                     return <SettingGroup name={category.name} note={category.note}>
-                        <For each={category.settings}>
-                            {(setting) => {
+                        <For each={Object.keys(category.settings)}>
+                            {(key) => {
+                                const setting = category.settings[key as keyof typeof category["settings"]] as (TextSetting | FileSetting | SwitchSetting);
                                 let component = () => <span>No clue why this is here</span>;
                                 if (setting.type === "switch") component = () => <Switch initial={setting.value} />;
                                 if (setting.type === "text") component = () => <Text initial={setting.value} />;

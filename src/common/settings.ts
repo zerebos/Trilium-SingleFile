@@ -3,7 +3,7 @@ import {BackendAPI} from "trilium/backend";
 import {ipcRenderer} from "electron";
 
 import ipc from "./ipc.js";
-import config, {SettingsData, SSDD} from "./config.js";
+import config, {SettingsData} from "./config.js";
 
 
 let settingsNote: Note | void;
@@ -15,13 +15,13 @@ async function getSettingsNote() {
 }
 
 
-async function getSettings(): Promise<SSDD> {
+async function getSettings(): Promise<SettingsData> {
     if (!settingsNote) settingsNote = await getSettingsNote();
     if (!settingsNote) return getDefaults();
 
     const content = await settingsNote.getContent();
     try {
-        const saved = JSON.parse(content) as Partial<SSDD>;
+        const saved = JSON.parse(content) as Partial<SettingsData>;
         return Object.assign({}, getDefaults(), saved);
     }
     catch {
@@ -31,7 +31,7 @@ async function getSettings(): Promise<SSDD> {
 }
 
 
-async function updateSettings(newSettings: Partial<SSDD>): Promise<void> {
+async function updateSettings(newSettings: Partial<SettingsData>): Promise<void> {
     const current = await getSettings();
     Object.assign(current, newSettings);
 
@@ -47,13 +47,17 @@ async function updateSettings(newSettings: Partial<SSDD>): Promise<void> {
 
 
 function getDefaults() {
-    const defaults: SSDD = {};
+    const defaults: Partial<Record<keyof SettingsData, SettingsData[keyof SettingsData]>> = {};
     for (const cat of config) {
-        for (const setting of cat.settings) {
-            defaults[setting.id] = setting.value;
+        if (!cat.settings) continue;
+        for (const id in cat.settings) {
+            if (!id) continue;
+            const val = cat.settings[id as keyof SettingsData]?.value;
+            if (typeof(val) === "undefined") continue;
+            defaults[id as keyof SettingsData] = val;
         }
     }
-    return defaults;
+    return defaults as SettingsData;
 }
 
 
