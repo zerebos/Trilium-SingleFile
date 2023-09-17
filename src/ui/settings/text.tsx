@@ -1,7 +1,12 @@
 import {createSignal, ParentProps} from "solid-js";
 
 
-export default function Text(props: ParentProps<{initial: string, onChange?: (value: string) => void}>) {
+interface TextInputProps<T> extends ParentProps {
+    initial: string;
+    onChange?: T;
+}
+
+export default function TextInput<T extends (value: string) => void>(props: TextInputProps<T>) {
     const [value, setValue] = createSignal(props.initial); // eslint-disable-line solid/reactivity
 
     function change(ev: Event) {

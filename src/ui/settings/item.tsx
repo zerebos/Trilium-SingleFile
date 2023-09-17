@@ -14,8 +14,8 @@ export default function SettingItem(props: ItemProps) {
             <div class="setting-name">{props.name}</div>
             {props.inline && props.children}
         </div>
-        <div class="setting-note">{props.note}</div>
         {!props.inline && props.children}
+        <div class="setting-note">{props.note}</div>
         <div class="setting-divider" />
     </div>;
 }

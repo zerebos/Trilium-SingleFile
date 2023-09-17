@@ -1,0 +1,136 @@
+.settings-panel,
+.setting-group,
+.setting-group-list,
+.setting-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-panel {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.setting-group {
+    background: #1B1B1D;
+    padding: 16px 24px;
+    border-radius: 12px;
+}
+
+.setting-group + .setting-group {
+    margin-top: 15px;
+}
+
+.setting-group-title {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    color: #777;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.setting-group-note {
+    margin-bottom: 20px;
+}
+
+.setting-item {
+    gap: 10px;
+}
+
+.setting-item.inline {
+    gap: 0px;
+}
+
+.setting-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.setting-name {
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.setting-divider {
+    width: calc(100% - 0px);
+    height: 2px;
+    background: rgba(255,255,255,0.05);
+    margin: 6px auto 16px auto;
+}
+
+.setting-item.inline .setting-divider {
+    margin-top: 16px;
+}
+
+.setting-item:last-child .setting-divider {
+    display: none;
+}
+
+/* {!isChecked() && <i class="bx bxs-toggle-left" style={{color: "#f25f58"}} onClick={toggle} />} */
+/* {isChecked() && <i class="bx bxs-toggle-right" style={{color: "#58cb42"}} onClick={toggle} />} */
+
+.switch-input {
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.switch-input .bx {
+    display: flex;
+    align-items: center;
+    color: #f25f58;
+    transition: color 200ms ease;
+    /* transform: rotateY(0deg); */
+}
+
+/* .switch-input.checked .bx {
+    color: #58cb42;
+    transform: rotateY(180deg);
+} */
+
+.switch-input .bx.bxs-toggle-left {
+    color: #f25f58;
+}
+
+.switch-input .bx.bxs-toggle-right {
+    color: #58cb42;
+}
+
+.text-input {
+    background: #292C30!important;
+    border-radius: 12px;
+    padding: 6px 6px 6px 12px;
+    border: 1px solid transparent;
+    outline: 0;
+}
+
+.text-input:focus {
+    border-color: #ccc;
+}
+
+.file-input-wrap {
+    display: flex;
+    align-items: center;
+}
+
+.file-input-wrap button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: #444950;
+    border: 0;
+    color: #ccc;
+    border-radius: 12px 0 0 12px;
+}
+
+.file-input-wrap .file-input {
+    flex: 1;
+    background: #292C30!important;
+    border-radius: 0 12px 12px 0;
+    padding: 6px 6px 6px 12px;
+    border: 0px solid transparent;
+    outline: 0;
+}

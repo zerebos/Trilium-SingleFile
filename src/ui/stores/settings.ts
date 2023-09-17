@@ -1,59 +1,25 @@
-import {ipcRenderer} from "electron";
 import {createSignal, createRoot} from "solid-js";
-import ipc from "../../common/ipc.js";
+import {SettingsData} from "../../common/config.js";
+import {getDefaults, getSettings, updateSettings} from "../../common/settings.js";
+import debounce from "../../common/debounce.js";
 
-interface QueuedFile {
-    file: File;
-    status: "queued" | "imported" | "error" | "invalid";
-}
 
 function createQueue() {
-    const [getFiles, setQueue] = createSignal<QueuedFile[]>([], {equals: false});
+    const [settings, setSettings] = createSignal<SettingsData>(getDefaults());
 
-    async function importFile(file: File) {
-        if (!file.name.endsWith(".html")) return setQueue(f => [...f, {file, status: "invalid"}]);
-        const content = await file.text();
-        if (!content.includes("Page saved with SingleFile")) return setQueue(f => [...f, {file, status: "invalid"}]);
-        setQueue(f => [...f, {file, status: "queued"}]);
-        try {
-            await ipcRenderer.invoke(ipc.IMPORT, file.name, content);
-        }
-        catch {
-            setQueue(files => {
-                const qFile = files.find(f => f.file.name === file.name);
-                if (!qFile) return files; // Uh oh, should handle this better
-                qFile.status = "error";
-                return [...files];
-            });
-        }
-        await new Promise(r => setTimeout(r, 1000));
-        // setTimeout(() => {
-            setQueue(files => {
-                const qFile = files.find(f => f.file.name === file.name);
-                // console.log(qFile);
-                if (!qFile) return files; // Uh oh, should handle this better
-                qFile.status = "imported";
-                return [...files];
-                // const index = files.findIndex(f => f.file.name === file.name);
-                // if (index < 0) return files; // Uh oh, should handle this better
-                // const removed = files.splice(index, 1);
-                // removed[0].status = "imported";
-                // return [...files, removed[0]];
-            });
-        // }, 1000);
-        
-        // setTimeout(() => {
-        //     setQueue(files => {
-        //         const index = files.findIndex(f => f.name === file.name);
-        //         if (index < 0) return files; // Uh oh, should handle this better
-        //         files.splice(index, 1);
-        //         return [...files];
-        //     });
-        // }, 1000);
+    void getSettings().then(s => {
+        setSettings(s);
+    });
 
+    async function updateSetting(id: keyof SettingsData, value: SettingsData[keyof SettingsData]) {
+        await updateSettings({[id]: value});
+        setSettings((s: SettingsData) => {
+            (s as Record<keyof SettingsData, SettingsData[keyof SettingsData]>)[id] = value;
+            return {...s};
+        });
     }
 
-    return {getFiles, importFile};
+    return {settings, updateSetting: debounce(updateSetting, 50)};
 }
 
 export default createRoot(createQueue);

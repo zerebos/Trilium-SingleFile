@@ -1,7 +1,12 @@
 import {createSignal, ParentProps} from "solid-js";
 
 
-export default function Switch(props: ParentProps<{initial: boolean, onChange?: (value: boolean) => void}>) {
+interface SwitchProps<T extends ((value: boolean) => void)> extends ParentProps {
+    initial: boolean;
+    onChange?: T;
+}
+
+export default function Switch<T extends ((value: boolean) => void)>(props: SwitchProps<T>) {
     const [isChecked, setChecked] = createSignal(props.initial); // eslint-disable-line solid/reactivity
 
     function toggle() {
@@ -9,8 +14,7 @@ export default function Switch(props: ParentProps<{initial: boolean, onChange?: 
         setChecked(!isChecked());
     }
 
-    return <>
-        {!isChecked() && <i class='bx bxs-toggle-left' style={{color: "#f25f58"}} onClick={toggle} />}
-        {isChecked() && <i class='bx bxs-toggle-right' style={{color: "#58cb42"}} onClick={toggle} />}
-    </>;
+    return <div class="switch-input" classList={{checked: isChecked()}}>
+        <i class="bx" classList={{"bxs-toggle-left": !isChecked(), "bxs-toggle-right": isChecked()}} onClick={toggle} />
+    </div>;
 }
