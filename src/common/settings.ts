@@ -3,7 +3,7 @@ import {BackendAPI} from "trilium/backend";
 import {ipcRenderer} from "electron";
 
 import ipc from "./ipc.js";
-import defaultSettings, {SettingsType} from "./defaults.js";
+import config, {SettingsData, SSDD} from "./config.js";
 
 
 let settingsNote: Note | void;
@@ -15,23 +15,23 @@ async function getSettingsNote() {
 }
 
 
-async function getSettings(): Promise<SettingsType> {
+async function getSettings(): Promise<SSDD> {
     if (!settingsNote) settingsNote = await getSettingsNote();
-    if (!settingsNote) return Object.assign({}, defaultSettings);
+    if (!settingsNote) return getDefaults();
 
     const content = await settingsNote.getContent();
     try {
-        const saved = JSON.parse(content) as Partial<SettingsType>;
-        return Object.assign({}, defaultSettings, saved);
+        const saved = JSON.parse(content) as Partial<SSDD>;
+        return Object.assign({}, getDefaults(), saved);
     }
     catch {
         api.showError("Trilium SingleFile settings note seems to be corrupt.");
-        return Object.assign({}, defaultSettings);
+        return getDefaults();
     }
 }
 
 
-async function updateSettings(newSettings: Partial<SettingsType>): Promise<void> {
+async function updateSettings(newSettings: Partial<SSDD>): Promise<void> {
     const current = await getSettings();
     Object.assign(current, newSettings);
 
@@ -47,8 +47,14 @@ async function updateSettings(newSettings: Partial<SettingsType>): Promise<void>
 
 
 function getDefaults() {
-    return Object.assign({}, defaultSettings);
+    const defaults: SSDD = {};
+    for (const cat of config) {
+        for (const setting of cat.settings) {
+            defaults[setting.id] = setting.value;
+        }
+    }
+    return defaults;
 }
 
 
-export {getSettingsNote, getSettings, updateSettings, getDefaults, SettingsType};
+export {getSettingsNote, getSettings, updateSettings, getDefaults, SettingsData};

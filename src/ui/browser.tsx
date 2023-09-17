@@ -14,7 +14,7 @@ export default function BrowserWindow(props: ParentProps) {
                         <span class="window-dot" style={{background: "rgb(88, 203, 66)"}} />
                     </div>
                     <div class="address-bar">
-                        {"https://trilium-singlefile/" + evaluatedTabs()[activeTab()].path}
+                        {"http://trilium-singlefile/" + evaluatedTabs()[activeTab()].path}
                     </div>
                     <div class="hamburger">
                         <span class="burger-bar" />
@@ -42,6 +42,7 @@ interface BrowserTabProps {
     path: string;
     icon?: JSXElement;
 }
+
 export const BrowserTab: Component<BrowserTabProps> = (props) => {
     return props as unknown as JSXElement;
 };
