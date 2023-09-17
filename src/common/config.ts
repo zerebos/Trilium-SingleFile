@@ -72,6 +72,12 @@ const config = [
                 type: "switch",
                 value: true
             },
+            iconTemplate: {
+                name: "Icon",
+                note: "Box icon to use when importing files to notes.",
+                type: "text",
+                value: "bx-world"
+            }
         }
     },
     {

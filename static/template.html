@@ -5,9 +5,7 @@
             <span class="window-dot" style="background: rgb(251, 190, 60);"></span>
             <span class="window-dot" style="background: rgb(88, 203, 66);"></span>
         </div>
-        <div class="address-bar">
-            {url}
-        </div>
+        <div id="address-target" class="address-bar"></div>
         <div class="hamburger">
             <span class="burger-bar"></span>
             <span class="burger-bar"></span>
@@ -15,7 +13,7 @@
         </div>
     </div>
     <div class="browser-body">
-        <iframe src="api/notes/{noteId}/open" scrolling="no">You've somehow disabled iframes!</iframe>
+        <iframe id="iframe-target" src="">You've somehow disabled iframes!</iframe>
     </div>
 </div>
 <style>
@@ -85,11 +83,3 @@
         overflow: hidden;
     }
 </style>
-<script>
-    (() => {
-        const iframe = document.querySelector("#browser-window iframe");
-        iframe.addEventListener("load", () => {
-            iframe.style.height = `${iframe.contentWindow.document.body.scrollHeight}px`;
-        });
-    })();
-</script>

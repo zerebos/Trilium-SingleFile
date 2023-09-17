@@ -107,7 +107,7 @@
 }
 
 .text-input:focus {
-    border-color: #ccc;
+    border-color: #aaa;
 }
 
 .file-input-wrap {
@@ -124,6 +124,11 @@
     border: 0;
     color: #ccc;
     border-radius: 12px 0 0 12px;
+    transition: background-color 200ms ease;
+}
+
+.file-input-wrap button:hover {
+    background: #535961;
 }
 
 .file-input-wrap .file-input {

@@ -1,6 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import template from "../../static/template.html";
 import fs from "fs";
 import path from "path";
 
@@ -43,5 +40,5 @@ export default async function checkAndImport(file: string, fileContent?: string)
     const settings = await getSettings();
     const finalTitle = settings.titleTemplate.replace("{pageTitle}", title).replace("{pageUrl}", url).replace("{saveDate}", date);
 
-    await api.runOnBackend(setupNotes, [finalTitle, url, date, content, (template as string).replace("{url}", url)]);
+    await api.runOnBackend(setupNotes, [content, {title: finalTitle, url, date, iconClass: `bx ${settings.iconTemplate}`}]);
 }
