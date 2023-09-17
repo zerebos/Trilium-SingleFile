@@ -15,5 +15,8 @@ function Panel() {
 }
 
 export function render() {
-    mount(() => <Panel />, document.getElementById("render-note-root")!);
+    const root = document.getElementById("render-note-root")!;
+    const target = root.parentElement!;
+    root.remove();
+    mount(() => <Panel />, target);
 }
