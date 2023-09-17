@@ -1,0 +1,74 @@
+.import-files {
+    flex: 1;
+    width: 100%;
+}
+
+.drop-zone {
+    display: flex;
+    flex: 1;
+    min-height: 300px;
+    margin: 30px;
+    padding: 20px;
+    border: 5px dashed #444950;
+    border-radius: 12px;
+    justify-content: center;
+    align-items: center;
+    transition: border-color 200ms ease, transform 200ms ease;
+    transform: scale(1);
+}
+
+.drop-zone.active {
+    border-color: #AAAAAA;
+    transform: scale(1.05);
+}
+
+.import-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 20px 50px;
+}
+
+@keyframes singlefile-loading {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.import-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.import-name {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.import-status {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+}
+
+.import-status .bx-loader-circle {
+    animation: singlefile-loading 1.5s linear infinite;
+}
+
+.import-status .bxs-badge-check {
+    color: #58CB42;
+}
+
+.import-status .bxs-error-circle {
+    color: #F25F58;
+}
+
+.import-status .bxs-error {
+    color: #FBBE3C;
+}

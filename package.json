@@ -8,6 +8,8 @@
     "build": "esrun scripts/build.ts",
     "build-main": "esrun scripts/build.ts -- --module=main",
     "build-ui": "esrun scripts/build.ts -- --module=ui",
+    "build-styles": "esrun scripts/build.ts -- --module=styles",
+    "build-settings": "esrun scripts/build.ts -- --module=ui --module=styles",
     "build-dist": "esrun scripts/build.ts -- --minify",
     "pack": "tpack",
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -12,10 +12,10 @@ import setupNotes from "./backend.js";
 const htmlTitleRegex = /<title>(.+?)<\/title>/;
 const fileTitleRegex = /^(.*) \(.*\)\.html$/;
 
-export default async function checkAndImport(file: string) {
+export default async function checkAndImport(file: string, fileContent?: string) {
     const filename = path.basename(file);
     if (!filename.endsWith(".html")) return;
-    const content = fs.readFileSync(file).toString();
+    const content = fileContent ?? fs.readFileSync(file).toString();
     if (!content.includes("Page saved with SingleFile")) return;
 
 

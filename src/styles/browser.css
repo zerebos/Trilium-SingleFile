@@ -1,0 +1,105 @@
+#browser-window {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 900px;
+}
+
+#browser-window .browser-body {
+    flex: 1;
+}
+
+#browser-window .browser-header {
+    display: flex;
+    align-items: center;
+    background: #444950;
+    border-radius: 12px 12px 0 0;
+    overflow: hidden;
+    padding: 10px 16px;
+    min-height: 49px;
+}
+
+#browser-window .window-dot {
+    border-radius: 50%;
+    display: inline-block;
+    height: 12px;
+    margin-right: 6px;
+    margin-top: 4px;
+    width: 12px;
+}
+
+#browser-window .address-bar {
+    display: flex;
+    align-items: center;
+    background-color: #1B1B1D;
+    border-radius: 12.5px;
+    color: #DADDE1;
+    flex: 1 0;
+    font: 400 13px Arial, sans-serif;
+    margin: 0 1rem 0 .5rem;
+    padding: 5px 15px;
+}
+
+#browser-window .burger-bar {
+    background-color: #aaa;
+    display: block;
+    height: 3px;
+    margin: 3px 0;
+    width: 17px;
+}
+
+#browser-window .browser-body {
+    background: #292c30;
+    display: flex;
+    border: 3px solid #444950;
+    border-top: 0;
+    border-radius: 0 0 12px 12px;
+    padding: 20px;
+}
+
+#browser-window .browser-body iframe {
+    flex: 1;
+    border: 0;
+    outline: 0;
+    border-radius: 0 0 12px 12px;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* --active-tab-background-color: transparent;
+--active-tab-hover-background-color: transparent;
+--active-tab-text-color: #ccc;
+
+--inactive-tab-background-color: #2D2D2D;
+--inactive-tab-hover-background-color: #525252;
+--inactive-tab-text-color: #bbb; */
+
+
+#browser-window .browser-tabs {
+    background: #444950;
+    display: flex;
+    padding: 0 10px;
+    gap: 10px;
+    user-select: none;
+}
+
+#browser-window .browser-tabs .browser-tab {
+    background: #1B1B1D;
+    display: flex;
+    border-radius: 12px 12px 0 0;
+    padding: 6px 10px 3px 10px;
+    align-items: center;
+    gap: 6px;
+    line-height: 1.5;
+}
+
+#browser-window .browser-tabs .browser-tab:hover {
+    background: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+#browser-window .browser-tabs .browser-tab.active {
+    background: #292C30;
+}

@@ -20,8 +20,9 @@ dotenv.config();
 if (process.env.TRILIUM_ETAPI_TOKEN) tepi.token(process.env.TRILIUM_ETAPI_TOKEN);
 
 const bundleMap = {
-    ui: process.env.UI_NOTE_ID,
-    main: process.env.MAIN_NOTE_ID
+    "ui.js": process.env.UI_NOTE_ID,
+    "styles.css": process.env.CSS_NOTE_ID,
+    "main.js": process.env.MAIN_NOTE_ID
 };
 
 const triliumPlugin: esbuild.Plugin = {
@@ -33,8 +34,7 @@ const triliumPlugin: esbuild.Plugin = {
             const bundles = Object.keys(result.metafile.outputs);
             for (const bundle of bundles) {
                 const filename = path.basename(bundle);
-                const name = filename.split(".")[0];
-                const noteId = bundleMap[name as keyof typeof bundleMap];
+                const noteId = bundleMap[filename as keyof typeof bundleMap];
                 if (!noteId) {
                     console.error(`No note id found for bundle ${bundle}`);
                     continue;
@@ -54,17 +54,17 @@ const triliumPlugin: esbuild.Plugin = {
     }
 };
 
-const modules = ["ui", "main"];
+const modules = ["ui", "main", "styles"];
 const entryPoints: {in: string, out: string}[] = [];
-const makeEntry = (mod: string) => ({"in": path.join(rootDir, "src", mod, "index.ts"), "out": mod});
+const makeEntry = (mod: string) => ({"in": path.join(rootDir, "src", mod, mod === "styles" ? "index.css" : "index.ts"), "out": mod});
 
-const moduleRequested = process.argv.find(a => a.startsWith("--module="))?.replace("--module=", "") ?? "";
-if (modules.includes(moduleRequested)) {
-    entryPoints.push(makeEntry(moduleRequested));
+const modulesRequested = process.argv.filter(a => a.startsWith("--module="));
+for (const mod of modulesRequested) {
+    const module = mod?.replace("--module=", "") ?? "";
+    if (modules.includes(module)) entryPoints.push(makeEntry(module));
 }
-else {
-    for (const mod of modules) entryPoints.push(makeEntry(mod));
-}
+
+if (!entryPoints.length) for (const mod of modules) entryPoints.push(makeEntry(mod));
 
 
 const plugins = [triliumPlugin];
@@ -87,6 +87,7 @@ async function runBuild() {
             ".woff2": "dataurl",
             ".ttf": "dataurl",
             ".html": "text",
+            ".css": "css"
         },
         plugins: plugins,
         logLevel: "info",

@@ -19,7 +19,7 @@ async function settingsUpdated() {
 
 async function initialize() {
     ipcMain.removeHandler(ipc.IMPORT);
-    ipcMain.handle(ipc.IMPORT, (_, file) => checkAndImport(file as string)); // Invoke with await ipcRenderer.invoke(ipc.IMPORT, fullpath);
+    ipcMain.handle(ipc.IMPORT, (_, file: string, content?: string) => checkAndImport(file, content)); // Invoke with await ipcRenderer.invoke(ipc.IMPORT, fullpath);
     
     const settings = await Settings.getSettings();
     if (settings.shouldWatch) watcher = startWatcher(settings.watchFolder, checkAndImport);

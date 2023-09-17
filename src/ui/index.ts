@@ -1,6 +1,5 @@
-import helloworld from "./helloword.jsx";
+import {render} from "./panel.jsx";
 
 
-(helloworld as CallableFunction)();
-
-document.querySelector("#browser-window .address-bar")!.textContent = window.location.href;
+// document.querySelector("#browser-window .address-bar")!.textContent = window.location.href;
+render();
