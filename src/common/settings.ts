@@ -4,6 +4,7 @@ import {ipcRenderer} from "electron";
 
 import ipc from "./ipc.js";
 import config, {SettingsData} from "./config.js";
+import {isDesktop} from "./platform.js";
 
 
 let settingsNote: Note | void;
@@ -42,7 +43,7 @@ async function updateSettings(newSettings: Partial<SettingsData>): Promise<void>
         (api as unknown as BackendAPI).getNote(id)?.setContent(content);
     }, [settingsNote.noteId, JSON.stringify(current, null, 4)]);
 
-    await ipcRenderer.invoke(ipc.SETTINGS_UPDATE);
+    if (isDesktop()) await ipcRenderer.invoke(ipc.SETTINGS_UPDATE);
 }
 
 

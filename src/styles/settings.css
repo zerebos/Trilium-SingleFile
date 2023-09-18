@@ -85,6 +85,11 @@
     /* transform: rotateY(0deg); */
 }
 
+.switch-input.disabled .bx {
+    color: #292C30 !important;
+    cursor: not-allowed;
+}
+
 /* .switch-input.checked .bx {
     color: #58cb42;
     transform: rotateY(180deg);
@@ -129,6 +134,11 @@
 
 .file-input-wrap button:hover {
     background: #535961;
+}
+
+.file-input-wrap.disabled button {
+    cursor: not-allowed;
+    /* background: #292C30!important; */
 }
 
 .file-input-wrap .file-input {

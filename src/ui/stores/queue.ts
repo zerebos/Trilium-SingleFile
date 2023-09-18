@@ -1,6 +1,8 @@
 import {ipcRenderer} from "electron";
 import {createSignal, createRoot} from "solid-js";
 import ipc from "../../common/ipc.js";
+import {isDesktop} from "../../common/platform.js";
+import {ImportEvent} from "../../common/event.js";
 
 interface QueuedFile {
     id: string;
@@ -18,7 +20,8 @@ function createQueue() {
         if (!content.includes("Page saved with SingleFile")) return setQueue(f => [...f, {id, file, status: "invalid"}]);
         setQueue(f => [...f, {id, file, status: "queued"}]);
         try {
-            await ipcRenderer.invoke(ipc.IMPORT, file.name, content);
+            if (isDesktop()) await ipcRenderer.invoke(ipc.IMPORT, file.name, content);
+            else window.dispatchEvent(new ImportEvent(file.name, content));
         }
         catch {
             setQueue(files => {

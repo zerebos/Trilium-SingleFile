@@ -3,14 +3,17 @@ import path from "path";
 
 
 declare global {
-    interface Window { singleFileWatcher: fs.FSWatcher; }
+    interface Window { singleFileWatcher?: fs.FSWatcher; }
 }
 
 const timeCache: Record<string, number> = {};
 const isSystemError = (err: unknown): err is NodeJS.ErrnoException => "code" in (err as object);
 
 export default function startWatcher<T extends (f: string) => Promise<void>>(dir: string, callback: T) {
-    if (window.singleFileWatcher) window.singleFileWatcher.close();
+    if (window.singleFileWatcher) {
+        window.singleFileWatcher.close();
+        delete window.singleFileWatcher;
+    }
 
     const watcher = fs.watch(dir, {persistent: false});
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
@@ -20,6 +23,7 @@ export default function startWatcher<T extends (f: string) => Promise<void>>(dir
 
         // Attempt to wait for final save
         await new Promise(r => setTimeout(r, 100));
+
 
         const absolutePath = path.join(dir, filename.toString());
         try {

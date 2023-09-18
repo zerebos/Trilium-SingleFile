@@ -4,13 +4,14 @@ import path from "path";
 import {getSettings} from "../common/settings.js";
 
 import setupNotes from "./backend.js";
+import {isDesktop} from "../common/platform.js";
 
 
 const htmlTitleRegex = /<title>(.+?)<\/title>/;
 const fileTitleRegex = /^(.*) \(.*\)\.html$/;
 
 export default async function checkAndImport(file: string, fileContent?: string) {
-    const filename = path.basename(file);
+    const filename = isDesktop() ? path.basename(file) : file;
     if (!filename.endsWith(".html")) return;
     const content = fileContent ?? fs.readFileSync(file).toString();
     if (!content.includes("Page saved with SingleFile")) return;

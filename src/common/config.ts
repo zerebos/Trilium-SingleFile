@@ -1,4 +1,5 @@
 import {app} from "@electron/remote";
+import {isDesktop} from "./platform.js";
 
 export interface SettingsCategory {
     name: string;
@@ -35,18 +36,21 @@ export interface FileSetting extends Setting {
 const config = [
     {
         name: "File Watcher",
+        note: "These settings are only available on the desktop application!",
         settings: {
             watchFolder: {
                 name: "Watch Folder",
                 note: "Directory that should be watched for new SingleFile pages.",
                 type: "file",
-                value: app.getPath("downloads")
+                value: isDesktop() ? app.getPath("downloads") : "",
+                disabled: !isDesktop()
             },
             shouldWatch: {
                 name: "Should Watch",
                 note: "Whether the file watcher should be active.",
                 type: "switch",
-                value: true
+                value: isDesktop(),
+                disabled: !isDesktop()
             },
         }
     },

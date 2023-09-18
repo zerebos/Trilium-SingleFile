@@ -1,4 +1,4 @@
-#browser-window {
+.browser-window {
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -7,11 +7,11 @@
     max-width: 900px;
 }
 
-#browser-window .browser-body {
+.browser-window .browser-body {
     flex: 1;
 }
 
-#browser-window .browser-header {
+.browser-window .browser-header {
     display: flex;
     align-items: center;
     background: #444950;
@@ -21,7 +21,7 @@
     min-height: 49px;
 }
 
-#browser-window .window-dot {
+.browser-window .window-dot {
     border-radius: 50%;
     display: inline-block;
     height: 12px;
@@ -30,7 +30,7 @@
     width: 12px;
 }
 
-#browser-window .address-bar {
+.browser-window .address-bar {
     display: flex;
     align-items: center;
     background-color: #1B1B1D;
@@ -42,7 +42,7 @@
     padding: 5px 15px;
 }
 
-#browser-window .burger-bar {
+.browser-window .burger-bar {
     background-color: #aaa;
     display: block;
     height: 3px;
@@ -50,22 +50,13 @@
     width: 17px;
 }
 
-#browser-window .browser-body {
+.browser-window .browser-body {
     background: #292c30;
     display: flex;
     border: 3px solid #444950;
     border-top: 0;
     border-radius: 0 0 12px 12px;
     padding: 20px;
-}
-
-#browser-window .browser-body iframe {
-    flex: 1;
-    border: 0;
-    outline: 0;
-    border-radius: 0 0 12px 12px;
-    height: 100vh;
-    overflow: hidden;
 }
 
 /* --active-tab-background-color: transparent;
@@ -77,7 +68,7 @@
 --inactive-tab-text-color: #bbb; */
 
 
-#browser-window .browser-tabs {
+.browser-window .browser-tabs {
     background: #444950;
     display: flex;
     padding: 0 10px;
@@ -85,7 +76,7 @@
     user-select: none;
 }
 
-#browser-window .browser-tabs .browser-tab {
+.browser-window .browser-tabs .browser-tab {
     background: #1B1B1D;
     display: flex;
     border-radius: 12px 12px 0 0;
@@ -95,11 +86,11 @@
     line-height: 1.5;
 }
 
-#browser-window .browser-tabs .browser-tab:hover {
+.browser-window .browser-tabs .browser-tab:hover {
     background: rgba(0, 0, 0, 0.5);
     cursor: pointer;
 }
 
-#browser-window .browser-tabs .browser-tab.active {
+.browser-window .browser-tabs .browser-tab.active {
     background: #292C30;
 }

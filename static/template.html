@@ -1,11 +1,11 @@
-<div id="browser-window">
+<div id="browser-target" class="browser-window">
     <div class="browser-header">
         <div class="window-actions">
             <span class="window-dot" style="background: rgb(242, 95, 88);"></span>
             <span class="window-dot" style="background: rgb(251, 190, 60);"></span>
             <span class="window-dot" style="background: rgb(88, 203, 66);"></span>
         </div>
-        <div id="address-target" class="address-bar"></div>
+        <div class="address-bar"></div>
         <div class="hamburger">
             <span class="burger-bar"></span>
             <span class="burger-bar"></span>
@@ -13,23 +13,23 @@
         </div>
     </div>
     <div class="browser-body">
-        <iframe id="iframe-target" src="">You've somehow disabled iframes!</iframe>
+        <iframe src="">You've somehow disabled iframes!</iframe>
     </div>
 </div>
 <style>
-    #browser-window {
+    .browser-window {
         display: flex;
         flex-direction: column;
-        height: 100%;
+        /* height: 100%; */
         margin: 20px auto;
         width: 90%;
     }
 
-    #browser-window .browser-body {
+    .browser-window .browser-body {
         flex: 1;
     }
 
-    #browser-window .browser-header {
+    .browser-window .browser-header {
         display: flex;
         align-items: center;
         background: #444950;
@@ -39,7 +39,7 @@
         min-height: 49px;
     }
 
-    #browser-window .window-dot {
+    .browser-window .window-dot {
         border-radius: 50%;
         display: inline-block;
         height: 12px;
@@ -48,7 +48,7 @@
         width: 12px;
     }
 
-    #browser-window .address-bar {
+    .browser-window .address-bar {
         display: flex;
         align-items: center;
         background-color: #1B1B1D;
@@ -60,7 +60,7 @@
         padding: 5px 15px;
     }
 
-    #browser-window .burger-bar {
+    .browser-window .burger-bar {
         background-color: #aaa;
         display: block;
         height: 3px;
@@ -68,18 +68,17 @@
         width: 17px;
     }
     
-    #browser-window .browser-body {
+    .browser-window .browser-body {
         display: flex;
         border: 3px solid #444950;
         border-radius: 0 0 12px 12px;
     }
     
-    #browser-window .browser-body iframe {
+    .browser-window .browser-body iframe {
         flex: 1;
         border: 0;
         outline: 0;
         border-radius: 0 0 12px 12px;
-        height: 100vh;
         overflow: hidden;
     }
 </style>

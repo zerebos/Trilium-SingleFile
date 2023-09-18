@@ -6,6 +6,7 @@ interface FileInputProps<T> extends ParentProps {
     initial: string;
     directory?: boolean;
     onChange?: T;
+    disabled?: boolean;
 }
 
 export default function FileInput<T extends (value: string) => void>(props: FileInputProps<T>) {
@@ -21,8 +22,8 @@ export default function FileInput<T extends (value: string) => void>(props: File
         });
     }
 
-    return <div class="file-input-wrap">
-        <button class="file-browse" onClick={browse}><i class="bx bxs-folder-open" />Browse</button>
+    return <div class="file-input-wrap" classList={{disabled: props.disabled}}>
+        <button class="file-browse" onClick={browse} disabled={props.disabled}><i class="bx bxs-folder-open" />Browse</button>
         <input class="file-input" type="input" value={value()} readOnly={true} />
     </div>;
 }

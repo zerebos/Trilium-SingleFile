@@ -23,9 +23,9 @@ export default function Settings() {
                             {(key: keyof SettingsData) => {
                                 const setting = category.settings[key] as (TextSetting | FileSetting | SwitchSetting);
                                 let component = () => <span>No clue why this is here</span>;
-                                if (setting.type === "switch") component = () => <Switch initial={settings()[key] as boolean} onChange={(value: boolean) => updateSetting(key, value)} />;
-                                if (setting.type === "text") component = () => <Text initial={settings()[key] as string} onChange={(value: string) => updateSetting(key, value)} />;
-                                if (setting.type === "file") component = () => <FileInput initial={setting.value} directory={setting.directory} onChange={(value: string) => updateSetting(key, value)} />;
+                                if (setting.type === "switch") component = () => <Switch initial={settings()[key] as boolean} onChange={(value: boolean) => updateSetting(key, value)} disabled={setting.disabled} />;
+                                if (setting.type === "text") component = () => <Text initial={settings()[key] as string} onChange={(value: string) => updateSetting(key, value)} disabled={setting.disabled} />;
+                                if (setting.type === "file") component = () => <FileInput initial={setting.value} directory={setting.directory} onChange={(value: string) => updateSetting(key, value)} disabled={setting.disabled} />;
                                 // if (setting.type === "file") return undefined;
                                 return <SettingItem name={setting.name} note={setting.note} inline={setting.type === "switch"}>
                                     <Dynamic component={component} />

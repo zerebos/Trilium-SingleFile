@@ -4,6 +4,7 @@ import {createSignal, ParentProps} from "solid-js";
 interface TextInputProps<T> extends ParentProps {
     initial: string;
     onChange?: T;
+    disabled?: boolean;
 }
 
 export default function TextInput<T extends (value: string) => void>(props: TextInputProps<T>) {

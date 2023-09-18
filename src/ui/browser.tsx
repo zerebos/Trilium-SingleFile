@@ -6,7 +6,7 @@ export default function BrowserWindow(props: ParentProps) {
     const tabs = children(() => props.children);
     const evaluatedTabs = () => tabs.toArray() as unknown as BrowserTabProps[];
 
-    return <div id="browser-window">
+    return <div class="browser-window">
                 <div class="browser-header">
                     <div class="window-actions">
                         <span class="window-dot" style={{background: "rgb(242, 95, 88)"}} />
