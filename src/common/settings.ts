@@ -10,7 +10,7 @@ import {isDesktop} from "./platform.js";
 let settingsNote: Note | void;
 
 async function getSettingsNote() {
-    const settings = await api.searchForNote("#singleFileSettings");
+    const settings = await api.searchForNote("#triliumSingleFile=settings");
     if (!settings) return api.showError("Trilium SingleFile could not find settings note, you may need to reinstall this addon.");
     return settings;
 }

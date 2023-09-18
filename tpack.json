@@ -4,26 +4,63 @@
         "title": "Trilium SingleFile",
         "type": "render",
         "attributes": {
-            "~renderNote": "static/index.html"
+            "~renderNote": "static/index.html",
+            "#triliumSingleFile": "ui"
         },
         "children": [
             {
-                "title": "",
-                "file": "static/index.html",
-                "children": [
-                    {"title": "UI", "file": "dist/ui.js"}
-                ]
-            },
-            {
-                "title": "Main",
-                "file": "dist/main.js",
+                "title": "Settings",
+                "file": "static/settings.json",
                 "attributes": {
-                    "#run": "frontendStartup"
+                    "#run": "frontendStartup",
+                    "#triliumSingleFile": "settings",
+                    "#archived": ""
                 }
             },
             {
-                "title": "Settings",
-                "file": "static/settings.json"
+                "title": "Main JS",
+                "file": "dist/main.js",
+                "attributes": {
+                    "#run": "frontendStartup",
+                    "#triliumSingleFile": "main",
+                    "#archived": ""
+                }
+            },
+            {
+                "title": "UI HTML",
+                "file": "static/index.html",
+                "attributes": {
+                    "#triliumSingleFile": "ui.html",
+                    "#archived": ""
+                },
+                "children": [
+                    {
+                        "title": "UI JS",
+                        "file": "dist/ui.js",
+                        "attributes": {
+                            "#triliumSingleFile": "ui.js",
+                            "#archived": ""
+                        }
+                    }
+                ]
+            },
+            {
+                "title": "Renderer HTML",
+                "file": "static/renderer.html",
+                "attributes": {
+                    "#triliumSingleFile": "renderer",
+                    "#archived": ""
+                },
+                "children": [
+                    {
+                        "title": "Renderer JS",
+                        "file": "static/renderer.js",
+                        "attributes": {
+                            "#triliumSingleFile": "renderer.js",
+                            "#archived": ""
+                        }
+                    }
+                ]
             }
         ]
     }

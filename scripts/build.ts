@@ -21,7 +21,6 @@ if (process.env.TRILIUM_ETAPI_TOKEN) tepi.token(process.env.TRILIUM_ETAPI_TOKEN)
 
 const bundleMap = {
     "ui.js": process.env.UI_NOTE_ID,
-    "styles.css": process.env.CSS_NOTE_ID,
     "main.js": process.env.MAIN_NOTE_ID
 };
 
@@ -36,7 +35,7 @@ const triliumPlugin: esbuild.Plugin = {
                 const filename = path.basename(bundle);
                 const noteId = bundleMap[filename as keyof typeof bundleMap];
                 if (!noteId) {
-                    console.error(`No note id found for bundle ${bundle}`);
+                    console.info(`No note id found for bundle ${bundle}`);
                     continue;
                 }
 
@@ -48,6 +47,45 @@ const triliumPlugin: esbuild.Plugin = {
 
                 const contents = fs.readFileSync(bundlePath).toString();
                 await tepi.putNoteContentById(noteId, contents);
+            }
+            
+        });
+    }
+};
+
+const cssMap = {
+    "ui.js": {
+        styles: "dist/styles.css"
+    }
+};
+
+const bundleRaw: esbuild.Plugin = {
+    name: "BundleRaw",
+    setup(build) {
+        build.onEnd(result => {
+            if (!result.metafile) return;
+
+            const bundles = Object.keys(result.metafile.outputs);
+            for (const bundle of bundles) {
+                const filename = path.basename(bundle);
+                const mapping = cssMap[filename as keyof typeof cssMap];
+                if (!mapping) {
+                    console.info(`No mapping found for bundle ${bundle}`);
+                    continue;
+                }
+
+                const bundlePath = path.join(rootDir, bundle);
+                if (!fs.existsSync(bundlePath)) {
+                    console.error(`Could not find bundle ${bundle}`);
+                    continue;
+                }
+
+                let contents = fs.readFileSync(bundlePath).toString();
+                for (const key in mapping) {
+                    const other = fs.readFileSync(path.join(rootDir, mapping[key as keyof typeof mapping])).toString();
+                    contents = contents.replace(`{${key}}`, other);
+                }
+                fs.writeFileSync(bundlePath, contents);
             }
             
         });
@@ -67,7 +105,7 @@ for (const mod of modulesRequested) {
 if (!entryPoints.length) for (const mod of modules) entryPoints.push(makeEntry(mod));
 
 
-const plugins = [triliumPlugin];
+const plugins = [bundleRaw, triliumPlugin];
 if (entryPoints.find(e => e.out === "ui")) plugins.push(solidPlugin());
 
 async function runBuild() {

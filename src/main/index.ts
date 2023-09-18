@@ -20,11 +20,12 @@ async function settingsUpdated() {
 
 
 declare global {
-    interface Window { singleFileEventListener: (ev: ImportEvent) => void; }
+    interface Window { singleFileImportEventListener: (ev: ImportEvent) => void; }
 }
 
 
 async function initialize() {
+    // Setup import handlers, file watcher, settings listener
     if (isDesktop()) {
         ipcMain.removeHandler(ipc.IMPORT);
         ipcMain.handle(ipc.IMPORT, (_, file: string, content?: string) => checkAndImport(file, content)); // Invoke with await ipcRenderer.invoke(ipc.IMPORT, fullpath);
@@ -36,12 +37,15 @@ async function initialize() {
         ipcMain.handle(ipc.SETTINGS_UPDATE, settingsUpdated); // eslint-disable-line @typescript-eslint/no-misused-promises
     }
     else {
+        // This else clause will need settings listeners when 
+        // new settings are added that could affect main process
+        // other than watcher
         const importListener = (ev: ImportEvent) => {
             void checkAndImport(ev.detail.name, ev.detail.content);
         };
 
-        if (window.singleFileEventListener) window.removeEventListener(ipc.IMPORT, window.singleFileEventListener);
-        window.singleFileEventListener = importListener;
+        if (window.singleFileImportEventListener) window.removeEventListener(ipc.IMPORT, window.singleFileImportEventListener);
+        window.singleFileImportEventListener = importListener;
         window.addEventListener(ipc.IMPORT, importListener);
     }
 }
