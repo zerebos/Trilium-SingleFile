@@ -32,7 +32,12 @@ There are some features specific to the desktop client of Trilium.
 
 ## Usage
 
-Use the UI to customize your settings at any time!
+- New imports are automatically placed into your `#singleFileInbox`
+    - If there's no note with `#singleFileInbox` attribute then it uses `#inbox`
+    - If there's no `#inbox` then it uses a daily note
+- Use the UI to customize your settings at any time!
+- All render notes will be given `#singleFilePreview`
+- All SingleFile notes will be given `#singleFileSource`
 
 ### Import
 
