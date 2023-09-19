@@ -1,8 +1,14 @@
 {
   "name": "trilium-singlefile",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "0.1.0",
+  "description": "An addon for Trilium to easily import SingleFile archives.",
+  "homepage": "https://github.com/rauenzi/Trilium-SingleFile",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rauenzi/Trilium-SingleFile.git"
+  },
+  "keywords": ["trilium", "notes", "singlefile"],
+  "private": true,
   "type": "module",
   "scripts": {
     "build": "esrun scripts/build.ts",

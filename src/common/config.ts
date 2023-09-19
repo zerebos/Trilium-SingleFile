@@ -74,7 +74,8 @@ const config = [
                 name: "Browser Template",
                 note: "Whether imports should use the fancy pseudo-browser interface.",
                 type: "switch",
-                value: true
+                value: true,
+                disabled: true
             },
             iconTemplate: {
                 name: "Icon",

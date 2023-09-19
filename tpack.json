@@ -5,7 +5,8 @@
         "type": "render",
         "attributes": {
             "~renderNote": "static/index.html",
-            "#triliumSingleFile": "ui"
+            "#triliumSingleFile": "ui",
+            "#iconClass": "bx bx-import"
         },
         "children": [
             {
