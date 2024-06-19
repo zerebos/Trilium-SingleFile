@@ -10,6 +10,7 @@ import FileInput from "./settings/file.jsx";
 import {Dynamic} from "solid-js/web";
 
 import settingsStore from "./stores/settings.js";
+import AdvancedSettings from "./advanced.jsx";
 
 
 export default function Settings() {
@@ -35,5 +36,6 @@ export default function Settings() {
                     </SettingGroup>;
                 }}
             </For>
+            <AdvancedSettings />
         </div>;
 }
