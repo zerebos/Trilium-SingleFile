@@ -23,6 +23,10 @@ export default function DropZone() {
         setDragCount(ev.dataTransfer.items.length);
     }
 
+    function dragOver(ev: DragEvent) {
+        ev.preventDefault();
+    }
+
     function reset() {
         setDragCount(0);
     }
@@ -33,7 +37,7 @@ export default function DropZone() {
     }
 
     return <div class="import-files">
-                <div class="drop-zone" classList={{active: dragCount() > 0}} onDrop={dropHandler} onDragEnter={dragHandler} onDragLeave={reset}>
+                <div class="drop-zone" classList={{active: dragCount() > 0}} onDrop={dropHandler} onDragEnter={dragHandler} onDragLeave={reset} onDragOver={dragOver}>
                     {message()}
                 </div>
                 {getFiles().length === 0 ? undefined 

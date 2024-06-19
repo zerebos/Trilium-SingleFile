@@ -4,7 +4,7 @@ declare const api: BackendAPI;
 
 interface RenderAttributes {
     title: string;
-    url: string;
+    pageUrl: string;
     date: string;
     iconClass: string;
 }

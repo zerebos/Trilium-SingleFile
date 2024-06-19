@@ -47,7 +47,7 @@ if (scroller.length) {
 
 // Assume the current note is the render note
 const currentNote = api.getActiveContextNote();
-address.textContent = currentNote.getLabelValue("url");
+address.textContent = currentNote.getLabelValue("url") ?? currentNote.getLabelValue("pageUrl");
 const children = await currentNote.getChildNotes();
 let target = children.find(n => n.hasLabel("singleFileSource"));
 

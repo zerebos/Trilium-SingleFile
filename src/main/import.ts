@@ -18,11 +18,11 @@ export default async function checkAndImport(file: string, fileContent?: string)
 
 
     // Extract url and date from the SingleFile comment
-    let url = "", date = "";
+    let pageUrl = "", date = "";
     const lines = content.split("\n");
     for (const l of lines) {
         const line = l.trim();
-        if (line.startsWith("url: ")) url = line.replace("url:", "").trim();
+        if (line.startsWith("url: ")) pageUrl = line.replace("url:", "").trim();
         if (line.startsWith("saved date: ")) date = line.replace("saved date:", "").trim();
     }
 
@@ -39,7 +39,7 @@ export default async function checkAndImport(file: string, fileContent?: string)
     }
 
     const settings = await getSettings();
-    const finalTitle = settings.titleTemplate.replace("{pageTitle}", title).replace("{pageUrl}", url).replace("{saveDate}", date);
+    const finalTitle = settings.titleTemplate.replace("{pageTitle}", title).replace("{pageUrl}", pageUrl).replace("{saveDate}", date);
 
-    await api.runOnBackend(setupNotes, [content, {title: finalTitle, url, date, iconClass: `bx ${settings.iconTemplate}`}]);
+    await api.runOnBackend(setupNotes, [content, {title: finalTitle, pageUrl: pageUrl, date: date, iconClass: `bx ${settings.iconTemplate}`}]);
 }
