@@ -1,6 +1,6 @@
 {
   "name": "trilium-singlefile",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "An addon for Trilium to easily import SingleFile archives.",
   "homepage": "https://github.com/rauenzi/Trilium-SingleFile",
   "repository": {
