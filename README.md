@@ -40,12 +40,12 @@ After importing, you will see a new note called **Trilium SingleFile** in your n
 
 1. In your note tree, click **Trilium SingleFile** (the root plugin note).
    - Open its **Owned Attributes** (click the `</>` button on the toolbar, or press <kbd>Alt+A</kbd>).
-   - Find the `disabled` label and delete it.
+   - Find the `#disabled` label and delete it.
 1. Expand **Trilium SingleFile** and click **Main JS** (the JavaScript child note tagged `#triliumSingleFile=main`).
    - Open its **Owned Attributes** the same way.
-   - Find the `disabled` label and delete it.
+   - Find the `#disabled` label and delete it.
 1. Click **Settings** (the child note tagged `#triliumSingleFile=settings`).
-   - Remove the `disabled` label from its **Owned Attributes** as well.
+   - Remove the `#disabled` label from its **Owned Attributes** as well.
 1. Reload the **Trilium SingleFile** note — the plugin UI should now appear.
 
 ### How it works
