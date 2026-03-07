@@ -32,6 +32,18 @@ There are some features specific to the desktop client of Trilium.
 
 After importing, you will see a new note called **Trilium SingleFile** in your note tree. This note is a [render note](https://github.com/zadam/trilium/wiki/Note-types#render-note) — it contains the plugin UI and acts as the main entry point.
 
+### Enabling the plugin (newer Trilium versions)
+
+> ⚠️ Trilium 0.63+ automatically adds a `#disabled` label to imported scripts and render notes as a security measure. If the plugin UI does not appear when you click the **Trilium SingleFile** note, you need to remove this label from two notes.
+
+1. In your note tree, click **Trilium SingleFile**.
+   - Open its **Owned Attributes** (click the `</>` button on the toolbar, or press <kbd>Alt+A</kbd>).
+   - Find the `disabled` label and delete it.
+1. Expand the **Trilium SingleFile** note and click **renderer.js** (the JavaScript child note).
+   - Open its **Owned Attributes** the same way.
+   - Find the `disabled` label and delete it.
+1. Reload the **Trilium SingleFile** note — the plugin UI should now appear.
+
 ### How it works
 
 The plugin creates the following note structure automatically:
