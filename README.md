@@ -68,7 +68,7 @@ When you import a SingleFile page, the plugin automatically creates:
 ```
 <your inbox note>
 └── <Page Title>            ← render note (tagged #singleFilePreview)
-    │                         ~renderNote → Renderer HTML
+                              ~renderNote → Renderer HTML
     └── SingleFile Page     ← raw HTML source (tagged #singleFileSource, hidden with #archived)
 ```
 
